@@ -64,8 +64,9 @@ Putting the filter in the reducer state makes it easier to follow task changes a
 
 Repository: https://github.com/ahmetezr/assignment3
 
-The repository has separate commits for the changes and includes the four screenshots. The .gitignore file excludes node_modules and dist. The repository is currently private; instructor access has not been arranged yet.
+The repository has separate commits for the changes and includes the four screenshots. The .gitignore file excludes node_modules and dist. The repository is public, so the instructor can view the code, screenshots and commit history using the link above.
 
 ## Submission
 
 The ZIP contains an assignment3 folder with the code, configuration files, README and screenshots. It leaves out node_modules, dist and .git.
+
