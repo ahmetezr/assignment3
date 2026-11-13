@@ -60,10 +60,13 @@ The visible tasks and the four counts are calculated during rendering from the c
 
 Keeping the filter in the reducer state makes transitions easier to follow: the actions describe both task changes and filter selection in one place. The additional responsibility is to preserve the filter in every task update, especially Undo. The history therefore stores only task lists, so restoring earlier tasks does not unexpectedly switch the user's selected filter.
 
-## Git repository status
+## Bonus 4: Git repository
 
-The local Git repository records the work in separate commits and excludes node_modules and dist. Bonus 4 is pending: a GitHub/GitLab repository URL and instructor access must still be arranged before it is claimed.
+Repository: https://github.com/ahmetezr/assignment3
+
+The repository records the work in separate commits, includes the four screenshots, and excludes node_modules and dist. It is private; instructor access still needs to be arranged according to the CATS announcement.
 
 ## Submission
 
 Package one folder named assignment3 containing the source, configuration, lockfile, README and screenshots. Leave out node_modules, dist and .git.
+
