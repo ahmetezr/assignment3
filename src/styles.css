@@ -1,0 +1,28 @@
+:root { font-family: system-ui, sans-serif; color: #192d40; background: #edf3f5; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 950px; margin: 64px auto; padding: 0 24px; }
+header { margin-bottom: 28px; }
+h1 { font-size: clamp(32px, 5vw, 44px); margin: 8px 0; letter-spacing: -1.5px; }
+header p { color: #526476; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 2px; }
+.panel { background: white; border: 1px solid #dce5e9; border-radius: 18px; padding: 28px; box-shadow: 0 14px 40px #182e4010; }
+label { display: block; font-size: 14px; font-weight: 650; margin-bottom: 10px; }
+.add-controls { display: flex; gap: 12px; }
+input { min-width: 0; flex: 1; border: 1px solid #bbcbd5; border-radius: 8px; padding: 12px; font: inherit; }
+button { font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; padding: 10px 14px; background: #fff; border: 1px solid #c7d4dc; border-radius: 8px; color: #243e51; }
+button:hover { background: #edf4f7; }
+button:focus-visible, input:focus-visible { outline: 3px solid #69b4d4; outline-offset: 3px; }
+button.primary, .filters button[aria-pressed="true"] { background: #155f78; color: white; border-color: #155f78; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 26px 0; border-bottom: 1px solid #e3eaf0; }
+.list-heading { display: flex; align-items: center; justify-content: space-between; margin: 22px 0 12px; }
+h2 { font-size: 18px; margin: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+.task-row { display: flex; align-items: center; gap: 10px; padding: 17px 0; border-bottom: 1px solid #edf1f4; }
+.task-title { flex: 1; overflow-wrap: anywhere; }
+.status { font-size: 12px; border-radius: 20px; padding: 5px 9px; background: #edf1f5; white-space: nowrap; }
+.status.in-progress { color: #83520d; background: #fff0d2; }
+.status.done { color: #176043; background: #dbf5e8; }
+.empty { text-align: center; color: #647584; padding: 40px 0; }
+@media (max-width: 600px) { main { margin: 28px auto; padding: 0 14px; } .panel { padding: 18px; } .task-row { flex-wrap: wrap; } .task-title { flex-basis: 100%; } }
