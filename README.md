@@ -2,18 +2,18 @@
 
 Ahmet EZER — 2200008227
 
-Based on the supplied Vite + React + TypeScript starter.
+This project uses the Task Manager starter provided with the assignment. It adds filters, task counts, a Clear done button and Undo.
 
 ## Run
 
-Requires Node.js 20.19 or newer. Tested with Node.js 24.21.0.
+Node.js 20.19 or newer is needed. The project was checked with Node.js 24.21.0.
 
 ```text
 npm install
 npm run dev
 ```
 
-Open the address printed by Vite. Tasks and undo history are held in memory and reset on refresh.
+Open the address shown in the terminal. Tasks are kept in memory, so refreshing the page clears the tasks and undo history.
 
 ## Build and test
 
@@ -22,21 +22,21 @@ npm run build
 npm test
 ```
 
-The build runs TypeScript in strict mode before producing the Vite bundle.
+The build command checks TypeScript types and builds the app.
 
 ## Screenshots
 
-`screenshots/all.png`, `todo.png`, `in-progress.png` and `done.png` show the four filters with three tasks: one in each status. Counts always describe the complete task list.
+The screenshots folder has four images: all.png, todo.png, in-progress.png and done.png. They show three tasks, with one task in each status.
 
 ## Bonus 1: Undo
 
-The state contains `tasks`, `filter`, and `past: Task[][]`, an ordered history of earlier task lists. Each action that changes tasks appends the old list to `past`; Undo restores the last list and removes that history entry while keeping the current filter. Filter changes, unknown IDs and clearing a list with no completed tasks do not add history, and Undo is disabled when history is empty.
+The state has tasks, filter and past, where past stores the earlier task lists. When tasks change, the old list is saved so Undo can bring it back without changing the selected filter. Changing the filter does not add history, and the Undo button is disabled when there is no history.
 
 ## Bonus 2: Tests
 
-Vitest tests cover all six actions, the complete status cycle, frozen-state immutability, deterministic results, multiple undos, restoring cleared tasks, filtering, and counts. Edge cases include empty lists, unknown IDs, clearing with nothing done, and counts after deletion.
+The Vitest tests check every action, the three status changes, Undo and the filter functions. They also check that the old state is not changed, including the task objects and history lists. Other cases include an unknown ID, an empty list, clearing when nothing is done and checking counts after deleting a task.
 
-Output from the actual `npm test` run on 13 November 2026:
+Output from npm test on 13 November 2026:
 
 ```text
 > task-manager-assignment3@0.0.0 test
@@ -52,21 +52,20 @@ Output from the actual `npm test` run on 13 November 2026:
 
 ## Bonus 3: Explain your reducer
 
-A reducer must calculate its result only from the state and action it receives. It should not change the previous state or perform work outside the function. React can call reducers more than once in development to help reveal mistakes. If the reducer modifies an existing array, earlier state snapshots also change. Returning the same mutated object can also cause React to skip an update because its identity has not changed. In this project, mutation would damage the task lists stored for Undo as well.
+The reducer takes the current state and an action, then returns the next state. It needs to be pure, meaning the same inputs should give the same result. It should not change the old state. For example, using push on the existing task array would also change that earlier array. If the same state object is returned after changing it, React may skip the update. This would also cause problems with Undo because the saved lists could change too.
 
-The form creates the task ID with `crypto.randomUUID()` before dispatching the add action. Random ID generation inside the reducer would give different results for the same inputs. Including the ID in the action keeps the reducer deterministic and makes tests repeatable.
+The task ID is created in the form with crypto.randomUUID() before the add action is sent. If the reducer created the ID, running it twice with the same inputs could produce different tasks. Passing the ID in the action makes the result predictable and easier to test.
 
-The visible tasks and the four counts are calculated during rendering from the complete task list. They do not need their own state because they can always be computed from existing data. If a separate count were stored, deleting a completed task without updating that count could leave Done showing one task even though its list was empty. Deriving both values prevents that inconsistency.
+The filtered list and counts are calculated from state.tasks during rendering. Keeping separate copies would mean updating them every time a task changes. For example, after deleting a done task, the Done count could stay the same if that separate count was not updated. Calculating it from the tasks avoids this problem.
 
-Keeping the filter in the reducer state makes transitions easier to follow: the actions describe both task changes and filter selection in one place. The additional responsibility is to preserve the filter in every task update, especially Undo. The history therefore stores only task lists, so restoring earlier tasks does not unexpectedly switch the user's selected filter.
+Putting the filter in the reducer state makes it easier to follow task changes and filter changes in one place. The part that needs care is keeping the filter when tasks change or Undo is used. Only task lists are saved in past, so Undo restores tasks while leaving the current filter selected.
 
 ## Bonus 4: Git repository
 
 Repository: https://github.com/ahmetezr/assignment3
 
-The repository records the work in separate commits, includes the four screenshots, and excludes node_modules and dist. It is private; instructor access still needs to be arranged according to the CATS announcement.
+The repository has separate commits for the changes and includes the four screenshots. The .gitignore file excludes node_modules and dist. The repository is currently private; instructor access has not been arranged yet.
 
 ## Submission
 
-Package one folder named assignment3 containing the source, configuration, lockfile, README and screenshots. Leave out node_modules, dist and .git.
-
+The ZIP contains an assignment3 folder with the code, configuration files, README and screenshots. It leaves out node_modules, dist and .git.
